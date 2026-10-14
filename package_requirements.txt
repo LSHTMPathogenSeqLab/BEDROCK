@@ -1,0 +1,11 @@
+biopython>=1.86
+pandas>=1.5
+numpy>=1.23
+matplotlib>=3.7
+seaborn>=0.12
+scipy>=1.10
+
+pyranges>=0.0.120
+pybedtools>=0.9.1
+
+tqdm>=4.65

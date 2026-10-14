@@ -1,4 +1,4 @@
-# 🪨 BEDROCK
+# BEDROCK
 
 **BEDmethyl Recognition, Observation, and Characterisation Kit**
 
@@ -23,7 +23,7 @@ flowchart LR
 
 ---
 
-## ✨ What you get
+## What you get
 
 | | Figure | What it shows |
 |---|---|---|
@@ -40,7 +40,7 @@ flowchart LR
 
 ---
 
-## 🚀 Quick start
+## Quick start
 
 ```bash
 git clone git@github.com:LSHTMPathogenSeqLab/BEDROCK.git
@@ -52,11 +52,12 @@ python BEDROCK_main/main.py \
     --spreadsheet samples.tsv \
     --chr-list chr_list.txt \
     --ref ref.fasta \
-    --fai ref.fasta.fai \
     --annotation genes.gff3 \
     --threads 8 \
     --outdir results
 ```
+
+If you dont supply an annotation file then figures 4-6 wont be produced
 
 The environment includes modkit (≥ 0.4), samtools and minimap2. Each step prints how long it took and the peak memory used:
 
@@ -67,7 +68,7 @@ The environment includes modkit (≥ 0.4), samtools and minimap2. Each step prin
 
 ---
 
-## 📥 Inputs
+## Inputs
 
 ### Sample spreadsheet: `--spreadsheet`
 
@@ -77,13 +78,11 @@ Tab-separated, **no header**, one row per sample:
 |---|---|
 | 1 | **Sample name**: used on every plot |
 | 2 | **Sample type**: any grouping you like (species, lineage, treatment…). Samples sharing a type are pooled in the per-type motif heatmap |
-| 3 | Path to a **bedMethyl** file *or* a sorted, aligned **modBAM** (`.bam` / `.cram`) |
-| 4 | Path to a **depth** file, *or* `-` to compute it from the BAM in column 3 |
+| 3 | Path to a sorted, aligned **modBAM** (`.bam` / `.cram`). The bam needs to have methylated tags inside of it from dorado basecaller |
 
 ```tsv
 barcode01	L1.2.1	/data/bams/barcode01.bam	-
 barcode02	L4.5	/data/bams/barcode02.bam	-
-barcode08	L2.2.1	/data/bedmethyls/barcode08.bedmethyl	/data/depth/barcode08.depth
 ```
 
 Plots keep the order of the spreadsheet, so reorder the rows to reorder the columns.
@@ -92,15 +91,10 @@ Plots keep the order of the spreadsheet, so reorder the rows to reorder the colu
 
 One chromosome per line, taken straight from a BAM:
 
-```bash
-samtools idxstats sample.bam | awk '$3 > 0 {print $1}' > chr_list.txt
-```
+### Reference: `--ref`
 
-To rename chromosomes on the plots, add a second tab-separated column, e.g. `NC_000962.3<TAB>Mtb`.
-
-### Reference: `--ref`, `--fai`
-
-The **same** FASTA the reads were aligned to (`samtools faidx ref.fasta` makes the `.fai`).
+The **same** FASTA the reads were aligned to.
+Make sure the `.fasta` file has been indexed 
 
 ### Annotation: `--annotation` *(optional)*
 
@@ -108,7 +102,7 @@ GFF3 with `gene` features carrying `ID=` (e.g. NCBI RefSeq GFF3). Without it, Fi
 
 ---
 
-## 🧬 Starting from modBAMs
+## Starting from modBAMs
 
 Point column 3 at a modBAM and BEDROCK runs the modkit steps for you:
 
@@ -120,23 +114,9 @@ samtools depth -a <bam> > <outdir>/depth/<sample>.depth       # when column 4 is
 
 Every output is **reused on later runs** if it is newer than its input, so re-running to tweak a figure takes minutes, not hours. Use `--rerun-modkit` to force a rerun. The bedMethyl and depth paths used are written to `<outdir>/samples_resolved.tsv`.
 
-### 🩺 Getting BAMs ready
-
-Before any pileup, BEDROCK checks every BAM header and lists all unaligned, unsorted or missing files together. Two helper scripts fix what it finds:
-
-```bash
-# Report: status, contigs, sort order, index, mapped reads and MM/ML tags per BAM
-bash BEDROCK_main/check_bams.sh samples.tsv > bam_check.tsv
-
-# Realign UNALIGNED BAMs (keeping methylation tags) and sort UNSORTED ones
-bash BEDROCK_main/realign_bams.sh -r ref.fasta -o aligned/ -t 16 -s samples.tsv bam_check.tsv
-```
-
-`realign_bams.sh` runs `samtools fastq -T MM,ML,MN | minimap2 -ax map-ont -y -Y --secondary=no | samtools sort`, writes `samples.realigned.tsv` pointing at the new BAMs, and skips finished files if restarted.
-
 ---
 
-## 🔥 Motif heatmap (Figure 7)
+## Motif heatmap (Figure 7)
 
 For each sequence motif, BEDROCK finds every occurrence in the reference and asks: **what fraction of reads are modified there?**
 
@@ -180,7 +160,7 @@ python BEDROCK_main/run_motif_heatmap.py --table some.tsv --rows label --cols sa
 
 ---
 
-## ⚙️ All options
+##  All options
 
 <details>
 <summary>Click to expand</summary>
@@ -212,7 +192,7 @@ python BEDROCK_main/run_motif_heatmap.py --table some.tsv --rows label --cols sa
 
 ---
 
-## 📂 Outputs
+##  Outputs
 
 ```
 results/
@@ -234,7 +214,7 @@ results/
 
 ---
 
-## 🛠️ Troubleshooting
+##  Troubleshooting
 
 | Message | Cause | Fix |
 |---|---|---|

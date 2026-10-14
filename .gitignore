@@ -9,3 +9,12 @@ __pycache__/
 *.pyc
 build/
 *.egg-info/
+*.fasta
+*.fa
+*.fai
+*.gff
+*.gff3
+*.gtf
+samples*.tsv
+chr_list*.txt
+meta.yaml
