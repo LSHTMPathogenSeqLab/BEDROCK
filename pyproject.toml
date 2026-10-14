@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bedrock-methylation"
+version = "0.1.0"
+description = "Methylation figures from Oxford Nanopore modkit bedMethyl / modBAM files"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=1.5",
+    "numpy>=1.23",
+    "matplotlib>=3.7",
+    "seaborn>=0.12",
+    "scipy>=1.10",
+    "biopython>=1.80",
+    "pyranges>=0.0.120",
+    "pybedtools>=0.9.1",
+    "tqdm",
+]
+
+[project.scripts]
+bedrock = "bedrock.main:main"
+bedrock-motifs = "bedrock.run_motif_heatmap:main"
+
+[project.urls]
+Homepage = "https://github.com/LSHTMPathogenSeqLab/BEDROCK"
+
+[tool.setuptools.packages.find]
+include = ["bedrock*"]

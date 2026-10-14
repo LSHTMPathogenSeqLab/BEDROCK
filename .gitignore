@@ -1,0 +1,11 @@
+bams/
+*.bam
+*.bai
+*.cram
+*.bedmethyl
+*.depth
+results/
+__pycache__/
+*.pyc
+build/
+*.egg-info/
