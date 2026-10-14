@@ -39,16 +39,19 @@ flowchart LR
 | **Motifs** | `figure 7` | Methylation of every modification motif, per sample and pooled per sample type |
 
 ---
-
-## Quick start
+## Installation
 
 ```bash
-git clone git@github.com:LSHTMPathogenSeqLab/BEDROCK.git
-cd BEDROCK
-conda env create -f environment.yml
-conda activate methylation-analysis
+conda create -n bedrock -c lshtm-pathogenseq -c conda-forge -c bioconda bedrock-methylation
+conda activate bedrock
+```
 
-python BEDROCK_main/main.py \
+This installs BEDROCK together with everything it needs, including modkit and samtools.
+
+## Usage
+
+```bash
+bedrock \
     --spreadsheet samples.tsv \
     --chr-list chr_list.txt \
     --ref ref.fasta \
@@ -56,6 +59,18 @@ python BEDROCK_main/main.py \
     --threads 8 \
     --outdir results
 ```
+
+Only the motif heatmap (no `--annotation` needed):
+
+```bash
+bedrock-motifs \
+    --spreadsheet samples.tsv \
+    --chr-list chr_list.txt \
+    --ref ref.fasta \
+    --outdir results
+```
+
+Run `bedrock --help` or `bedrock-motifs --help` for all options.
 
 If you dont supply an annotation file then figures 4-6 wont be produced
 
