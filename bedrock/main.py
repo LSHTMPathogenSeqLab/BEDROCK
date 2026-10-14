@@ -6,18 +6,18 @@ import re
 import resource
 import time
 
-from args import get_args
-from data_loading import load_chr_map, load_fai, load_samples, load_genes_as_pyranges, concat_samples
-from check_install import check_install
-from methylation_summary import methylation_summary
-from reference_counts import count_reference_bases
-from figures.figure1 import figure_1a, figure_1b
-from figures.figure2 import base_composition, plot_base_composition
-from figures.merge_figure3 import run_figure3
-from figures.figure4n5 import run_figure4, assign_genes, run_figure5, remap_chromosomes
-from figures.figure6 import run_figure6
-from figures.motif_heatmap import prepare_motif_sites, run_motif_heatmap
-from modkit_runner import prepare_inputs, find_motif_tables
+from bedrock.args import get_args
+from bedrock.data_loading import load_chr_map, load_fai, load_samples, load_genes_as_pyranges, concat_samples
+from bedrock.check_install import check_install
+from bedrock.methylation_summary import methylation_summary
+from bedrock.reference_counts import count_reference_bases
+from bedrock.figures.figure1 import figure_1a, figure_1b
+from bedrock.figures.figure2 import base_composition, plot_base_composition
+from bedrock.figures.merge_figure3 import run_figure3
+from bedrock.figures.figure4n5 import run_figure4, assign_genes, run_figure5, remap_chromosomes
+from bedrock.figures.figure6 import run_figure6
+from bedrock.figures.motif_heatmap import prepare_motif_sites, run_motif_heatmap
+from bedrock.modkit_runner import prepare_inputs, find_motif_tables
 
 _T0 = [time.perf_counter()]
 

@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import pyranges as pr
-from config import BEDMETHYL_COLUMNS, DROP_BEDMETHYL_COLUMNS
+from bedrock.config import BEDMETHYL_COLUMNS, DROP_BEDMETHYL_COLUMNS
 
 def load_chr_map(chr_list_file):
     df = pd.read_csv(chr_list_file, sep="\t", header=None, names=["ref_chr", "assigned_chr"], lineterminator="\n")

@@ -1,5 +1,5 @@
-from figures.figure3ab import window_base_counts, plot_window_counts
-from figures.figure3cd import summarize_modifications, plot_mod_windows, get_chromosome_sizes, make_1kb_windows
+from bedrock.figures.figure3ab import window_base_counts, plot_window_counts
+from bedrock.figures.figure3cd import summarize_modifications, plot_mod_windows, get_chromosome_sizes, make_1kb_windows
 
 
 def run_figure3(ref_fasta, bed_all, chr_map, outdir):

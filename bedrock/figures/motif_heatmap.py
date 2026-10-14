@@ -12,9 +12,9 @@ from matplotlib.colors import ListedColormap
 from matplotlib.patches import Patch
 import seaborn as sns
 
-from config import SAMPLE_PALETTE, EXTENDED_PALETTE
-from methylation_summary import MOD_NAME_MAP
-from utils import make_palette
+from bedrock.config import SAMPLE_PALETTE, EXTENDED_PALETTE
+from bedrock.methylation_summary import MOD_NAME_MAP
+from bedrock.utils import make_palette
 
 FRACTION_VALUES = ("frac_mod", "mean_site_frac")
 JOIN_COLS = ["Chromosome", "Start_chrom_pos", "strand"]

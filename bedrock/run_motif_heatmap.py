@@ -4,7 +4,7 @@ import json
 import sys
 from pathlib import Path
 
-from args import add_modkit_args, add_motif_args
+from bedrock.args import add_modkit_args, add_motif_args
 
 
 def get_args():
@@ -35,7 +35,7 @@ def main():
     args = get_args()
 
     if args.table:
-        from figures.motif_heatmap import heatmap_from_table
+        from bedrock.figures.motif_heatmap import heatmap_from_table
         if not (args.rows and args.cols and args.value):
             sys.exit("[ERROR] --table needs --rows, --cols and --value")
         outdir = Path(args.outdir)
@@ -49,10 +49,10 @@ def main():
         )
         return
 
-    from check_install import check_install
-    from data_loading import load_chr_map, load_samples, concat_samples
-    from figures.motif_heatmap import prepare_motif_sites, run_motif_heatmap
-    from modkit_runner import prepare_inputs, find_motif_tables
+    from bedrock.check_install import check_install
+    from bedrock.data_loading import load_chr_map, load_samples, concat_samples
+    from bedrock.figures.motif_heatmap import prepare_motif_sites, run_motif_heatmap
+    from bedrock.modkit_runner import prepare_inputs, find_motif_tables
 
     check_install()
     for name in ("spreadsheet", "chr_list", "ref"):

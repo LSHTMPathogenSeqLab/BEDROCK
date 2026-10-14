@@ -4,7 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from Bio import SeqIO
 
-from utils import make_palette
+from bedrock.utils import make_palette
 
 
 WINDOW_SIZE = 1000

@@ -3,8 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from utils import make_palette
-from config import SAMPLE_PALETTE
+from bedrock.utils import make_palette
+from bedrock.config import SAMPLE_PALETTE
 
 def figure_1a(samples, outdir):
     df = pd.concat(

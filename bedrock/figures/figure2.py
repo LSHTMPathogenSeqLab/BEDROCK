@@ -3,8 +3,8 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-from utils import make_palette
-from config import BASE_CALL_PALETTE
+from bedrock.utils import make_palette
+from bedrock.config import BASE_CALL_PALETTE
 
 
 def base_composition(df, threshold):
